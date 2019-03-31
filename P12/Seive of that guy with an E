@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class P12 {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int runs = sc.nextInt();
+		for (int i = 0; i < runs; i++) {
+			int input = sc.nextInt();
+			ArrayList<Integer> output = new ArrayList<>();
+			ArrayList<Integer> init = new ArrayList<>();
+			Boolean two = false;
+			if (input == 2) {
+				System.out.println("{2}");
+				two = true;
+			} else {
+				int count =0;
+				for (int p = 2; p <= input; p++) {
+					init.add(p);
+				}
+				int temp = init.get(0);
+				output.add(temp);
+				boolean modified = false;
+				runner:while (true) {
+					for (int u = 0; u < init.size(); u++) {
+						if (init.get(u) % temp == 0&& init.get(u)!= temp) {
+							init.remove(u);
+							count++;
+							modified = true;
+						}
+					}
+					if(count!=0){
+						System.out.println("Prime "+temp +" Composite Set Size: "+ count);
+					}
+					count = 0;
+					if(modified == false) {
+						init.remove(0);
+						output.addAll(init);
+						break runner;
+					}else {
+						modified = false;
+					}
+					init.remove(0);
+					temp = init.get(0);
+					output.add(temp);
+					
+				}
+
+			}
+			String end = output.toString().replace("[", "{");
+			end = end.replace("]", "}");
+			if(two ==false)System.out.println(end);
+
+		}
+	}
+}
